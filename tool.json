@@ -21,7 +21,7 @@
   "access": "browser",
   "data_info": {
     "mode": "snapshot",
-    "detail": "DFO models soft-shell clam habitat from seabed and depth records and reports commercial landings for all clams by province and year.",
+    "detail": "DFO models soft-shell clam habitat and reports annual commercial landings. A 1931 fisheries return lists clam barrels and canned cases by district in Halifax and Digby.",
     "cadence": "Monthly",
     "probes": [
       {

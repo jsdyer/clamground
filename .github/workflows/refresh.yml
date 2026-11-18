@@ -35,4 +35,6 @@ jobs:
             git commit -m "Refresh DFO clam habitat and landings"
             git push origin HEAD:main
             gh workflow run pages.yml --ref main
+          elif [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            gh workflow run pages.yml --ref main
           fi

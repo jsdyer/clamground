@@ -1,4 +1,4 @@
-name: Browser tool · Check and publish
+name: Clam Grounds · Test and publish
 on:
   pull_request:
   push:
@@ -28,7 +28,7 @@ jobs:
         run: python3 -m unittest discover -s tests -v
       - name: Build the static application
         run: python3 scripts/build.py
-      - name: Check whether the tool has been initialized
+      - name: Validate the Clam Grounds catalogue identity
         id: identity
         env:
           REPOSITORY_NAME: ${{ github.event.repository.name }}
