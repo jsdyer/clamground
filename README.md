@@ -3,7 +3,7 @@
 [Explore the map and landings](https://coolcode.ca/clamground/). Choose a stretch of the Maritimes coast to explore DFO's soft-shell clam habitat model. Then choose a province, measure and year to compare the weight and value of Canada’s commercial clam landings.
 
 <!-- coolcode:guide -->
-Try Digby on the habitat map, then compare Nova Scotia’s landed weight and value per kilogram. The map describes soft-shell clams, while the commercial figures combine species reported as Clams.
+Try Digby on the habitat map, then compare Nova Scotia’s landed weight and value per kilogram. The map describes soft-shell clams, while the commercial figures combine species reported as Clams. The 1931 district returns show how many barrels went to the fresh market and how many cases were canned in Halifax and Digby counties.
 <!-- /coolcode:guide -->
 
 ## Reading the habitat model
