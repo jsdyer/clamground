@@ -1,16 +1,53 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "clamground",
+  "title": "Clam Grounds",
+  "description": "Explore modelled soft-shell clam habitat along the Maritime coast and compare historical Canadian clam landings.",
+  "category": "places",
+  "tags": [
+    "clams",
+    "Nova Scotia",
+    "Bay of Fundy",
+    "DFO",
+    "fisheries",
+    "habitat",
+    "commercial landings",
+    "Atlantic Canada",
+    "British Columbia"
+  ],
+  "icon": "anchor",
+  "url": "/clamground/",
+  "source": "https://github.com/jsdyer/clamground",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "snapshot",
+    "detail": "DFO models soft-shell clam habitat from seabed and depth records and reports commercial landings for all clams by province and year.",
+    "cadence": "Monthly",
+    "probes": [
+      {
+        "label": "Data retrieved",
+        "url": "https://coolcode.ca/clamground/data/records.json",
+        "path": [
+          "retrieved"
+        ],
+        "count_at": {
+          "path": [
+            "rows"
+          ],
+          "measure": "length",
+          "unit": "landings records"
+        }
+      },
+      {
+        "label": "Landings coverage",
+        "url": "https://coolcode.ca/clamground/data/records.json",
+        "path": [
+          "firstYear"
+        ],
+        "end_path": [
+          "lastYear"
+        ]
+      }
+    ]
   }
 }

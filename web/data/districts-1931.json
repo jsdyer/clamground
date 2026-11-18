@@ -1,0 +1,22 @@
+{
+  "title": "Fish Caught and Marketed, 1931",
+  "source": "https://publications.gc.ca/collections/collection_2018/statcan/24-201/CS24-201-1931-eng.pdf#page=87",
+  "reference": "Table I, printed page 84, rows 6–10 and 28–30",
+  "species": "Clams and Quahaugs",
+  "fields": ["district", "row", "landed_barrels", "fresh_barrels", "canned_cases"],
+  "notes": "Null preserves a dash in the printed table. Totals are transcribed county totals.",
+  "counties": {
+    "Halifax County": [
+      ["Guysborough county line to East Ship Harbour",6,100,100,null],
+      ["West Ship Harbour up to but excluding Cole Harbour",7,3740,1650,2090],
+      ["Cole Harbour to Pennant Point inclusive",8,null,null,null],
+      ["Pennant Point to Lunenburg county line",9,null,null,null],
+      ["County total",10,3840,1750,2090]
+    ],
+    "Digby County": [
+      ["Yarmouth county line to the Sissiboo River",28,887,333,554],
+      ["Sissiboo River inclusive to the Annapolis county line, including Digby Neck",29,10486,10486,null],
+      ["County total",30,11373,10819,554]
+    ]
+  }
+}
