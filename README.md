@@ -14,7 +14,9 @@ The DFO layer and a clipped Natural Earth land outline load with the site, so ex
 
 ## Reading the landings
 
-The DFO seafisheries CSV reports all commercially landed species grouped as **Clams** in kilograms and nominal Canadian dollars. The analysis includes provincial rows plus national and Atlantic totals as separate series. Adding these totals to the individual provinces would double-count catch. Value per kilogram is the published value divided by landed weight, not a retail clam price. Suppressed or missing amounts stay unavailable in the chart and blank in CSV exports. The area selected on the habitat map has no effect on province-wide statistics.
+The DFO seafisheries CSV reports all commercially landed species grouped as **Clams** in kilograms and nominal Canadian dollars. The analysis includes provincial rows plus national and Atlantic totals as separate series. Adding these totals to the individual provinces would double-count catch. Value per kilogram is the published value divided by landed weight, not a retail clam price. DFO uses province of landing and kilograms of live-weight equivalent. A hatched marker retains the source’s confidentiality flag (x). A reported zero and a missing figure are distinct. CSV exports keep the numeric cells empty where appropriate and carry a separate status for weight and value. The area selected on the habitat map has no effect on province-wide statistics.
+
+The annual release does not disaggregate ports, fleets or clam species. DFO documents that vessel losses reduced offshore harvesting capacity in 2007 and 2008 and that the fleet landed product in Grand Bank, Newfoundland and Labrador. The table alone cannot attribute the Nova Scotia series or its 2015 increase to a particular event. [DFO offshore clam management plan](https://publications.gc.ca/collections/collection_2021/mpo-dfo/Fs104-40-2014-eng.pdf)
 
 ## The 1931 fishing districts
 

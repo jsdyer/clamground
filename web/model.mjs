@@ -3,6 +3,19 @@ export function measure(row, metric) {
   return row[metric];
 }
 
+export function statusOf(row, metric) {
+  if (measure(row, metric) !== null) return "reported";
+  const fields = metric === "price" ? ["kg", "cad"] : [metric];
+  if (fields.some(key => row[key + "Status"] === "withheld")) return "withheld";
+  if (fields.some(key => row[key] == null)) return "unreported";
+  return "undefined";
+}
+
+export const statusLabel = {
+  reported: "Reported", withheld: "Withheld by DFO (x)",
+  unreported: "No published number", undefined: "Undefined at zero landed weight"
+};
+
 export function history(rows, region) {
   return rows.filter(row => row.region === region).sort((a,b) => a.year - b.year);
 }
@@ -27,8 +40,8 @@ export function habitatAt(features, lng, lat) {
 }
 
 export function exportRows(rows) {
-  return ["Region,Year,Weight_kg,Value_CAD,CAD_per_kg", ...rows.map(row => {
+  return ["Region,Year,Weight_kg,Value_CAD,CAD_per_kg,Weight_status,Value_status", ...rows.map(row => {
     const price = measure(row, "price");
-    return ['"'+row.region.replaceAll('"','""')+'"',row.year,row.kg??"",row.cad??"",price?.toFixed(4)??""].join(",");
+    return ['"'+row.region.replaceAll('"','""')+'"',row.year,row.kg??"",row.cad??"",price?.toFixed(4)??"",statusOf(row,"kg"),statusOf(row,"cad")].join(",");
   })].join("\r\n")+"\r\n";
 }
