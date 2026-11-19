@@ -36,7 +36,7 @@ def main():
                 assert "21,304,709 kg" in page.locator("#stat-value").inner_text()
                 page.locator("#region").select_option("New Brunswick")
                 page.locator("#year").select_option("2006")
-                assert page.locator("#stat-value").inner_text()=="Unavailable"
+                assert "Withheld by DFO" in page.locator("#stat-value").inner_text()
                 page.locator("#map.leaflet-container").wait_for()
                 page.locator("#coast").select_option("digby")
                 assert "Digby" in page.locator("#inspect").inner_text()
