@@ -53,6 +53,16 @@ def main():
                 assert "Withheld by DFO" in page.locator("#stat-value").inner_text()
                 page.locator("#year").select_option("2008")
                 assert "589,039 kg" in page.locator("#stat-value").inner_text()
+                page.locator("#baseline").select_option("2006")
+                assert page.locator("#peer").input_value() != "Nova Scotia"
+                assert "2 of 3" in page.locator("#comparison-results tr").first.inner_text()
+                assert "Withheld" in page.locator("#paired-years").text_content()
+                with page.expect_download() as downloaded:
+                    page.locator("#paired-download").click()
+                comparison = Path(downloaded.value.path()).read_text()
+                assert "withheld" in comparison and "Nova Scotia" in comparison
+                page.locator("#county").select_option("Queens County")
+                assert "468" in page.locator("#districts").inner_text()
                 page.screenshot(path=str(screenshots / "desktop.png"),full_page=True)
                 page.set_viewport_size({"width":375,"height":812})
                 assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")

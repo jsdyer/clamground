@@ -19,3 +19,16 @@ test("withheld differs from zero and follows the numerator of a unit price",()=>
  assert.equal(statusOf(row,"price"),"withheld");
  assert.equal(statusOf({kg:0,cad:0},"price"),"undefined");
 });
+
+test("paired intervals preserve unmatched years, confidential endpoints and zero baselines", async () => {
+  const {comparePeriod} = await import("../web/model.mjs");
+  const records = [{region:"A",year:2000,kg:2,cad:4},{region:"A",year:2002,kg:0,cad:0},
+    {region:"A",year:2003,kg:null,cad:null,kgStatus:"withheld",cadStatus:"withheld"}];
+  const period = comparePeriod(records,"A","kg",2000,2002);
+  assert.equal(period.percent,-1);
+  assert.equal(period.reported,2);
+  assert.equal(statusOf(period.rows[1],"kg"),"unreported");
+  assert.equal(comparePeriod(records,"A","kg",2002,2003).percent,null);
+  assert.equal(comparePeriod(records,"A","price",2000,2002).reported,1);
+  assert.equal(comparePeriod(records,"A","kg",2000,2003).percent,null);
+});

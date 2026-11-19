@@ -45,3 +45,16 @@ export function exportRows(rows) {
     return ['"'+row.region.replaceAll('"','""')+'"',row.year,row.kg??"",row.cad??"",price?.toFixed(4)??"",statusOf(row,"kg"),statusOf(row,"cad")].join(",");
   })].join("\r\n")+"\r\n";
 }
+
+export function comparePeriod(records, region, metric, start, end) {
+  const byYear = new Map(history(records, region).map(row => [row.year, row]));
+  const rows = Array.from({length: end - start + 1}, (_, i) => {
+    const year = start + i;
+    return byYear.get(year) ?? {region, year, kg: null, cad: null};
+  });
+  const first = measure(rows[0], metric);
+  const last = measure(rows.at(-1), metric);
+  const percent = first > 0 && last !== null ? (last - first) / first : null;
+  const reported = rows.filter(row => statusOf(row, metric) === "reported").length;
+  return {region, rows, reported, percent};
+}

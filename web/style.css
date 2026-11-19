@@ -4,3 +4,7 @@
 .yearbar.unreported span,.yearbar.undefined span,.legend .empty-key{height:4px;background:transparent;border-bottom:2px dotted #606e68}
 .yearbar.zero span{height:0;min-height:1px}.legend .reported-key{background:var(--teal)}
 .yearbar[aria-pressed=true]{outline:2px solid #a85618;outline-offset:-1px}
+
+.comparison{margin:1.2rem 0;padding:1rem;background:#e8ecde;border-top:2px solid #839c8d}
+.comparison h3{margin:0;font-size:1.25rem}.comparison>p{margin:.4rem 0 .8rem}
+#districts td:nth-child(2),#archive th:nth-child(2){text-align:left}

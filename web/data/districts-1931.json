@@ -1,22 +1,211 @@
 {
   "title": "Fish Caught and Marketed, 1931",
   "source": "https://publications.gc.ca/collections/collection_2018/statcan/24-201/CS24-201-1931-eng.pdf#page=87",
-  "reference": "Table I, printed page 84, rows 6–10 and 28–30",
+  "reference": "Table I, printed page 84, PDF page 87, all district and county quantity rows. Value rows are excluded.",
   "species": "Clams and Quahaugs",
-  "fields": ["district", "row", "landed_barrels", "fresh_barrels", "canned_cases"],
-  "notes": "Null preserves a dash in the printed table. Totals are transcribed county totals.",
+  "fields": [
+    "district",
+    "row",
+    "landed_barrels",
+    "fresh_barrels",
+    "canned_cases"
+  ],
+  "notes": "Null preserves a printed dash. Row numbers refer to the printed page. Where the report gives only a county total, no district breakdown is available.",
   "counties": {
-    "Halifax County": [
-      ["Guysborough county line to East Ship Harbour",6,100,100,null],
-      ["West Ship Harbour up to but excluding Cole Harbour",7,3740,1650,2090],
-      ["Cole Harbour to Pennant Point inclusive",8,null,null,null],
-      ["Pennant Point to Lunenburg county line",9,null,null,null],
-      ["County total",10,3840,1750,2090]
+    "Annapolis County": [
+      [
+        "County total",
+        32,
+        3880,
+        3880,
+        null
+      ]
     ],
     "Digby County": [
-      ["Yarmouth county line to the Sissiboo River",28,887,333,554],
-      ["Sissiboo River inclusive to the Annapolis county line, including Digby Neck",29,10486,10486,null],
-      ["County total",30,11373,10819,554]
+      [
+        "Yarmouth county line to the Sissiboo River",
+        28,
+        887,
+        333,
+        554
+      ],
+      [
+        "Sissiboo River inclusive to the Annapolis county line, including Digby Neck",
+        29,
+        10486,
+        10486,
+        null
+      ],
+      [
+        "County total",
+        30,
+        11373,
+        10819,
+        554
+      ]
+    ],
+    "Guysborough County": [
+      [
+        "Antigonish county line to Fox Island inclusive",
+        1,
+        null,
+        null,
+        null
+      ],
+      [
+        "Fox Island to Isaac’s Harbour inclusive",
+        2,
+        null,
+        null,
+        null
+      ],
+      [
+        "Isaac’s Harbour to Halifax county line",
+        3,
+        null,
+        null,
+        null
+      ],
+      [
+        "County total",
+        4,
+        null,
+        null,
+        null
+      ]
+    ],
+    "Halifax County": [
+      [
+        "Guysborough county line to East Ship Harbour",
+        6,
+        100,
+        100,
+        null
+      ],
+      [
+        "West Ship Harbour up to but excluding Cole Harbour",
+        7,
+        3740,
+        1650,
+        2090
+      ],
+      [
+        "Cole Harbour to Pennant Point inclusive",
+        8,
+        null,
+        null,
+        null
+      ],
+      [
+        "Pennant Point to Lunenburg county line",
+        9,
+        null,
+        null,
+        null
+      ],
+      [
+        "County total",
+        10,
+        3840,
+        1750,
+        2090
+      ]
+    ],
+    "Hants County": [
+      [
+        "County total",
+        12,
+        null,
+        null,
+        null
+      ]
+    ],
+    "Kings County": [
+      [
+        "County total",
+        34,
+        null,
+        null,
+        null
+      ]
+    ],
+    "Lunenburg County": [
+      [
+        "Halifax county line to Mahone Bay inclusive",
+        14,
+        null,
+        null,
+        null
+      ],
+      [
+        "Mahone Bay to Queens county line",
+        15,
+        null,
+        null,
+        null
+      ],
+      [
+        "County total",
+        16,
+        null,
+        null,
+        null
+      ]
+    ],
+    "Queens County": [
+      [
+        "County total",
+        18,
+        468,
+        173,
+        295
+      ]
+    ],
+    "Shelburne County": [
+      [
+        "Queens county line to but excluding Shelburne town",
+        20,
+        44,
+        44,
+        null
+      ],
+      [
+        "Shelburne town inclusive to Yarmouth county line",
+        21,
+        null,
+        null,
+        null
+      ],
+      [
+        "County total",
+        22,
+        44,
+        44,
+        null
+      ]
+    ],
+    "Yarmouth County": [
+      [
+        "Shelburne county line to the Tusket River inclusive",
+        24,
+        17,
+        17,
+        null
+      ],
+      [
+        "Tusket River to Digby county line, including Tusket Islands",
+        25,
+        141,
+        141,
+        null
+      ],
+      [
+        "County total",
+        26,
+        158,
+        158,
+        null
+      ]
     ]
   }
 }
