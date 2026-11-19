@@ -21,5 +21,12 @@ class ImportChecks(unittest.TestCase):
 
     def test_historical_transcription_totals(self):
         archive=json.loads((ROOT/"web/data/districts-1931.json").read_text())
+        self.assertEqual(len(archive["counties"]), 10)
+        self.assertEqual(sum(map(len, archive["counties"].values())), 25)
+        self.assertEqual(archive["counties"]["Queens County"], [["County total", 18, 468, 173, 295]])
         for rows in archive["counties"].values():
-            self.assertEqual([sum((r[i] or 0) for r in rows[:-1]) for i in [2,3,4]],rows[-1][2:])
+            if len(rows) == 1:
+                continue
+            for col in (2, 3, 4):
+                numbers = [row[col] for row in rows[:-1] if row[col] is not None]
+                self.assertEqual(sum(numbers) if numbers else None, rows[-1][col])

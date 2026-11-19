@@ -1,4 +1,4 @@
-import {exportRows,habitatAt,history,measure,statusOf,statusLabel} from "./model.mjs";
+import {comparePeriod,exportRows,habitatAt,history,measure,statusOf,statusLabel} from "./model.mjs";
 const el = id => document.getElementById(id);
 const number = new Intl.NumberFormat("en-CA");
 const priceFormat = new Intl.NumberFormat("en-CA",{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -62,10 +62,47 @@ function formatted(row,metric) {
   if(metric==="price") return "$"+priceFormat.format(value)+"/kg";
   return number.format(value)+" kg";
 }
+function tableRow(values) {
+  const row = document.createElement("tr");
+  for (const value of values) {
+    const cell = document.createElement("td");
+    cell.textContent = value;
+    row.append(cell);
+  }
+  return row;
+}
+function downloadHistory(rows, filename) {
+  const url = URL.createObjectURL(new Blob([exportRows(rows)], {type:"text/csv;charset=utf-8"}));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 function makeHistory(data) {
   for (const region of [...new Set(data.rows.map(r=>r.region))].sort()) el("region").add(new Option(region,region));
   el("region").value="Nova Scotia";
-  let rows;
+  let rows, paired;
+  function compare() {
+    const start = Number(el("baseline").value), end = Number(el("year").value), metric = el("metric").value;
+    paired = [el("region").value, el("peer").value].map(region => comparePeriod(data.rows, region, metric, start, end));
+    el("comparison-period").textContent = el("metric").selectedOptions[0].text + " · " + start + "–" + end;
+    el("base-heading").textContent = start;
+    el("end-heading").textContent = end;
+    el("comparison-results").replaceChildren(...paired.map(series => {
+      const delta = series.percent === null ? "Unavailable" : new Intl.NumberFormat("en-CA", {
+        style:"percent", maximumFractionDigits:1, signDisplay:"exceptZero"
+      }).format(series.percent);
+      return tableRow([series.region, formatted(series.rows[0], metric), formatted(series.rows.at(-1), metric),
+        delta, series.reported + " of " + series.rows.length]);
+    }));
+    el("area-one").textContent = paired[0].region;
+    el("area-two").textContent = paired[1].region;
+    el("paired-years").replaceChildren(...paired[0].rows.map((row, i) =>
+      tableRow([row.year, formatted(row, metric), formatted(paired[1].rows[i], metric)])));
+  }
   function render() {
     const metric=el("metric").value;
     const chosen=rows.find(r=>String(r.year)===el("year").value);
@@ -83,10 +120,19 @@ function makeHistory(data) {
       btn.onclick=()=>{el("year").value=row.year;render();el("chart").querySelector('[aria-pressed="true"]').focus({preventScroll:true});};
       return btn;
     }));
+    const baseline = Math.min(Number(el("baseline").value) || data.firstYear, chosen.year);
+    el("baseline").replaceChildren(...Array.from({length: chosen.year - data.firstYear + 1}, (_, i) =>
+      new Option(data.firstYear + i, data.firstYear + i)));
+    el("baseline").value = baseline;
+    compare();
     el("first").textContent=rows[0].year;el("last").textContent=rows.at(-1).year;
   }
   function regionChanged() {
     rows=history(data.rows,el("region").value);
+    const priorPeer = el("peer").value || "New Brunswick";
+    const peers = [...el("region").options].map(option => option.value).filter(value => value !== el("region").value);
+    el("peer").replaceChildren(...peers.map(value => new Option(value, value)));
+    el("peer").value = peers.includes(priorPeer) ? priorPeer : peers.includes("Nova Scotia") ? "Nova Scotia" : peers[0];
     const prior=Number(el("year").value);
     el("year").replaceChildren(...rows.map(r=>new Option(r.year,r.year)));
     el("year").value=rows.some(r=>r.year===prior)?prior:rows.at(-1).year;
@@ -101,20 +147,21 @@ function makeHistory(data) {
     render();
   }
   el("region").onchange=regionChanged;el("year").onchange=render;el("metric").onchange=render;
-  el("csv").onclick=()=>{
-    const url=URL.createObjectURL(new Blob([exportRows(rows)],{type:"text/csv;charset=utf-8"}));
-    const link=document.createElement("a");link.href=url;link.download="clam-landings-"+el("region").value.toLowerCase().replaceAll(" ","-")+".csv";
-    document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-  };
+  el("peer").onchange = compare;
+  el("baseline").onchange = compare;
+  el("paired-download").onclick = () => downloadHistory(paired.flatMap(series => series.rows),
+    "clam-comparison-" + el("baseline").value + "-" + el("year").value + ".csv");
+  el("csv").onclick = () => downloadHistory(rows, "clam-landings-" + el("region").value.toLowerCase().replaceAll(" ", "-") + ".csv");
   regionChanged();
 }
 function makeArchive(data) {
   const county=el("county");
   for(const name of Object.keys(data.counties)) county.add(new Option(name,name));
+  county.value = "Halifax County";
   function display() {
-    el("districts").replaceChildren(...data.counties[county.value].map(([name,,...figures])=>{
+    el("districts").replaceChildren(...data.counties[county.value].map(([name,sourceRow,...figures])=>{
       const tr=document.createElement("tr");
-      for(const value of [name,...figures]){
+      for(const value of [sourceRow,name,...figures]){
         const td=document.createElement("td");
         td.textContent=typeof value==="number"?number.format(value):value??"—";
         tr.append(td);

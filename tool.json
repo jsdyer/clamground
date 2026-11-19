@@ -1,7 +1,7 @@
 {
   "id": "clamground",
   "title": "Clam Grounds",
-  "description": "Explore modelled soft-shell clam habitat along the Maritime coast and compare historical Canadian clam landings.",
+  "description": "Explore Maritime soft-shell clam habitat, compare provincial landing histories and read Nova Scotia’s 1931 district returns.",
   "category": "places",
   "tags": [
     "clams",
@@ -21,7 +21,7 @@
   "access": "browser",
   "data_info": {
     "mode": "snapshot",
-    "detail": "DFO models soft-shell clam habitat and reports annual commercial landings. A 1931 fisheries return lists clam barrels and canned cases by district in Halifax and Digby.",
+    "detail": "DFO reports habitat and annual commercial landings. The 1931 fisheries return gives clam barrels and canned cases for ten Nova Scotia counties.",
     "cadence": "Monthly",
     "probes": [
       {

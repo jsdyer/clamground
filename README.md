@@ -3,7 +3,7 @@
 [Explore the map and landings](https://coolcode.ca/clamground/). Choose a stretch of the Maritimes coast to explore DFO's soft-shell clam habitat model. Then choose a province, measure and year to compare the weight and value of Canada’s commercial clam landings.
 
 <!-- coolcode:guide -->
-Try Digby on the habitat map, then compare Nova Scotia’s landed weight and value per kilogram. The map describes soft-shell clams, while the commercial figures combine species reported as Clams. The 1931 district returns show how many barrels went to the fresh market and how many cases were canned in Halifax and Digby counties.
+Compare Nova Scotia and New Brunswick over the same years to see where DFO published landings or withheld them. For a local historical view, choose a county in the 1931 returns and check its barrels or canned cases against the linked scan of page 84.
 <!-- /coolcode:guide -->
 
 ## Reading the habitat model
@@ -18,9 +18,11 @@ The DFO seafisheries CSV reports all commercially landed species grouped as **Cl
 
 The annual release does not disaggregate ports, fleets or clam species. DFO documents that vessel losses reduced offshore harvesting capacity in 2007 and 2008 and that the fleet landed product in Grand Bank, Newfoundland and Labrador. For 2008, the offshore fishing-ground table gives 19,336 tonnes from Banquereau, while the provincial table gives 589,039 kg of all commercial clams landed in Nova Scotia. The difference illustrates how a bank and a landing province describe different parts of the trip. The table alone cannot attribute the Nova Scotia series or its 2015 increase to a particular event. [DFO offshore clam management plan](https://publications.gc.ca/collections/collection_2021/mpo-dfo/Fs104-40-2014-eng.pdf) · [DFO fishing-ground figures, Table 1](https://publications.gc.ca/collections/collection_2013/mpo-dfo/Fs70-5-2011-052-eng.pdf)
 
+Select a second province or published total and a baseline year for a side-by-side history. The end year and measure come from the chart. The table compares endpoint changes and counts years with a usable figure. The annual comparison shows which years were withheld, missing or undefined at zero weight. A zero baseline or missing endpoint leaves the percentage unavailable. Download both series for the exact period with separate weight and value flags.
+
 ## The 1931 fishing districts
 
-Switch between Halifax and Digby counties to read eight quantity rows transcribed from Table I of the Dominion Bureau of Statistics’ *Fisheries Statistics, 1931*. The [original scan](https://publications.gc.ca/collections/collection_2018/statcan/24-201/CS24-201-1931-eng.pdf#page=87) is linked at printed page 84 (PDF page 87). The structured download preserves the source row numbers, barrel and case units, dashes and county totals. These archive records stay separate from the modern province-level series.
+Choose among ten counties from Guysborough to Kings to read all 25 quantity rows on printed page 84 of Table I of the Dominion Bureau of Statistics’ *Fisheries Statistics, 1931*. The [original scan](https://publications.gc.ca/collections/collection_2018/statcan/24-201/CS24-201-1931-eng.pdf#page=87) is linked at printed page 84 (PDF page 87). The [single-page facsimile](https://coolcode.ca/clamground/data/fisheries-1931-p84.webp) opens alongside the transcribed figures. Queens reported 468 barrels landed, 173 barrels sold fresh and 295 cases canned. Hants and Kings have dashes throughout. The structured download preserves the source row numbers, barrel and case units, dashes and county totals. These archive records stay separate from the modern province-level series.
 
 ## Sources and refresh
 
