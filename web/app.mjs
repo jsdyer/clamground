@@ -109,6 +109,7 @@ function makeHistory(data) {
     const chosen=rows.find(r=>String(r.year)===el("year").value);
     el("stat-label").textContent=chosen.region+" · "+chosen.year+" · "+el("metric").selectedOptions[0].textContent;
     el("stat-value").textContent=formatted(chosen,metric);
+    el("withheld-note").hidden = statusOf(chosen, metric) !== "withheld";
     const extra=["kg","cad","price"].filter(m=>m!==metric);
     el("other-measure").textContent=extra.map(m=>formatted(chosen,m)).join(" · ");
     const max=Math.max(1,...rows.map(row=>measure(row,metric)??0));

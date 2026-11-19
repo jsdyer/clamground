@@ -51,7 +51,10 @@ def main():
                 page.locator("#year").select_option("2024")
                 page.locator("#year").select_option("2007")
                 assert "Withheld by DFO" in page.locator("#stat-value").inner_text()
+                assert page.locator("#withheld-note").is_visible()
+                assert "confidentiality" in page.locator("#confidentiality").inner_text()
                 page.locator("#year").select_option("2008")
+                assert page.locator("#withheld-note").is_hidden()
                 assert "589,039 kg" in page.locator("#stat-value").inner_text()
                 page.locator("#baseline").select_option("2006")
                 assert page.locator("#peer").input_value() != "Nova Scotia"
