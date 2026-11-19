@@ -82,6 +82,7 @@ function downloadHistory(rows, filename) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 function makeHistory(data) {
+  const firstYear = Number(data.firstYear);
   for (const region of [...new Set(data.rows.map(r=>r.region))].sort()) el("region").add(new Option(region,region));
   el("region").value="Nova Scotia";
   let rows, paired;
@@ -120,9 +121,9 @@ function makeHistory(data) {
       btn.onclick=()=>{el("year").value=row.year;render();el("chart").querySelector('[aria-pressed="true"]').focus({preventScroll:true});};
       return btn;
     }));
-    const baseline = Math.min(Number(el("baseline").value) || data.firstYear, chosen.year);
-    el("baseline").replaceChildren(...Array.from({length: chosen.year - data.firstYear + 1}, (_, i) =>
-      new Option(data.firstYear + i, data.firstYear + i)));
+    const baseline = Math.min(Number(el("baseline").value) || firstYear, chosen.year);
+    el("baseline").replaceChildren(...Array.from({length: chosen.year - firstYear + 1}, (_, i) =>
+      new Option(firstYear + i, firstYear + i)));
     el("baseline").value = baseline;
     compare();
     el("first").textContent=rows[0].year;el("last").textContent=rows.at(-1).year;
