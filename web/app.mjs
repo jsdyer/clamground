@@ -1,4 +1,4 @@
-import {exportRows,habitatAt,history,measure} from "./model.mjs";
+import {exportRows,habitatAt,history,measure,statusOf,statusLabel} from "./model.mjs";
 const el = id => document.getElementById(id);
 const number = new Intl.NumberFormat("en-CA");
 const priceFormat = new Intl.NumberFormat("en-CA",{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -55,8 +55,9 @@ function makeMap(shapes,land) {
   };
 }
 
-function formatted(value,metric) {
-  if(value===null) return "Unavailable";
+function formatted(row,metric) {
+  const value = measure(row,metric);
+  if (value === null) return statusLabel[statusOf(row,metric)];
   if(metric==="cad") return "$"+number.format(value);
   if(metric==="price") return "$"+priceFormat.format(value)+"/kg";
   return number.format(value)+" kg";
@@ -69,14 +70,14 @@ function makeHistory(data) {
     const metric=el("metric").value;
     const chosen=rows.find(r=>String(r.year)===el("year").value);
     el("stat-label").textContent=chosen.region+" · "+chosen.year+" · "+el("metric").selectedOptions[0].textContent;
-    el("stat-value").textContent=formatted(measure(chosen,metric),metric);
+    el("stat-value").textContent=formatted(chosen,metric);
     const extra=["kg","cad","price"].filter(m=>m!==metric);
-    el("other-measure").textContent=extra.map(m=>formatted(measure(chosen,m),m)).join(" · ");
+    el("other-measure").textContent=extra.map(m=>formatted(chosen,m)).join(" · ");
     const max=Math.max(1,...rows.map(row=>measure(row,metric)??0));
     el("chart").replaceChildren(...rows.map(row=>{
-      const val=measure(row,metric), btn=document.createElement("button");
-      btn.type="button"; btn.className="yearbar"+(val===null?" missing":"");
-      btn.setAttribute("aria-label",row.year+" · "+formatted(val,metric));btn.title=btn.getAttribute("aria-label");
+      const val=measure(row,metric), state=statusOf(row,metric), btn=document.createElement("button");
+      btn.type="button"; btn.className="yearbar "+state+(val===0?" zero":"");
+      btn.setAttribute("aria-label",row.year+" · "+formatted(row,metric));btn.title=btn.getAttribute("aria-label");
       btn.setAttribute("aria-pressed",String(row.year===chosen.year));
       const bar=document.createElement("span");bar.style.setProperty("--height",(val??0)/max*100+"%");btn.append(bar);
       btn.onclick=()=>{el("year").value=row.year;render();el("chart").querySelector('[aria-pressed="true"]').focus({preventScroll:true});};
@@ -92,7 +93,7 @@ function makeHistory(data) {
     el("history").replaceChildren(...[...rows].reverse().map(row=>{
       const tr=document.createElement("tr");
       const dollar=measure(row,"price");
-      for(const v of [row.year,row.kg===null?"Unavailable":number.format(row.kg),row.cad===null?"Unavailable":number.format(row.cad),dollar===null?"Unavailable":priceFormat.format(dollar)]){
+      for(const v of [row.year,row.kg===null?formatted(row,"kg"):number.format(row.kg),row.cad===null?formatted(row,"cad"):number.format(row.cad),dollar===null?formatted(row,"price"):priceFormat.format(dollar)]){
         const cell=document.createElement("td");cell.textContent=v;tr.append(cell);
       }
       return tr;

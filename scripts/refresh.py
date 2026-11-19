@@ -66,7 +66,13 @@ def landings(raw):
         year, region = int(record["Year"]), record["Province"].strip()
         if (region, year) in result or not region or not 1900 <= year <= date.today().year:
             raise ValueError("Unexpected duplicate or invalid clam landing record")
-        result[region, year] = {"year": year, "region": region, "kg": amount(record["Quantity (kgs)"]), "cad": amount(record["Value (CAD)"])}
+        entry = {"year": year, "region": region}
+        for key, field in (("kg", "Quantity (kgs)"), ("cad", "Value (CAD)")):
+            raw_value = record[field].strip()
+            entry[key] = amount(raw_value)
+            if entry[key] is None:
+                entry[key + "Status"] = "withheld" if raw_value.lower() == "x" else "unreported"
+        result[region, year] = entry
     if sum(x["region"] == "Nova Scotia" for x in result.values()) < 30:
         raise ValueError("The downloaded file lacks the Nova Scotia history")
     return [result[k] for k in sorted(result)]
