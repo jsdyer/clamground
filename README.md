@@ -31,3 +31,11 @@ Choose among ten counties from Guysborough to Kings to read all 25 quantity rows
 - [Natural Earth 1:50m land](https://www.naturalearthdata.com/downloads/50m-physical-vectors/50m-land/) supplies the regional orientation layer, clipped to the Maritimes. Leaflet is distributed under the BSD 2-clause licence in web/vendor/LICENSE.
 
 The monthly GitHub Action resolves the latest English CSV from the federal catalogue, verifies the habitat classes and landing history, and publishes a complete snapshot. Both downloads must succeed before replacing the previous edition. The retrieval date records the download. The landings coverage ends in the last year supplied by DFO. Run `python3 scripts/refresh.py` to update the data, `python3 -m unittest discover -s tests`, `node --test tests/*.test.mjs` and `python3 scripts/build.py` to check and build the static site. All interactive selections stay in the browser.
+
+<!-- schedule-reliability -->
+## Schedule reliability
+
+Public GitHub repositories can have scheduled workflows disabled after 60 days of inactivity. A separate weekly [schedule guard](.github/workflows/schedule-guard.yml) calls GitHub's enable-workflow API for an explicit list of refresh workflows and itself. It can restore workflows disabled for inactivity, preserves manually disabled workflows, and runs independently of collection failures.
+
+This is an interim mitigation, not a scheduling guarantee: GitHub does not document active-workflow renewal as a permanent exemption, and scheduled runs can be delayed or dropped. A scheduler on our own Linux server is the planned independent trigger. The guard does not collect data, create dummy commits, or change source/check timestamps; successful collection and published data freshness still need monitoring.
+<!-- /schedule-reliability -->
