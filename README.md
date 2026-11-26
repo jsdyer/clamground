@@ -12,7 +12,7 @@ Compare Nova Scotia and New Brunswick over the same years to see where DFO publi
 
 The DFO Maritimes region classified soft substrates and depths from 0 to 70 metres. A suitable polygon in a validated coastal sector means historical harvesting or enforcement records established clam presence somewhere in that sector. Unclassified space is left blank. The map uses a regional display copy generalized at 0.003 degrees; its edges are approximate. The official [shellfish closures map](https://www.dfo-mpo.gc.ca/shellfish-mollusques/cssp-map-eng.htm) provides harvesting closure information. Check applicable rules and advisories before harvesting.
 
-The DFO layer and a clipped Natural Earth land outline load with the site, so exploring the map sends no coordinates to a map provider. Click a point to inspect its class. Use the coast menu and map zoom controls to navigate.
+The DFO layer and a clipped Natural Earth land outline load with the site, so exploring the map sends no coordinates to a map provider. The map opens with a classified example on the Halifax coast. Click another point to inspect its class. Use the coast menu and map zoom controls to navigate.
 
 ## Reading the landings
 

@@ -24,7 +24,8 @@ async function read(file) {
 function makeMap(shapes,land) {
   const map = L.map("map",{preferCanvas:true,scrollWheelZoom:false,minZoom:6,maxZoom:11,maxBounds:[[40,-73],[51,-51]],maxBoundsViscosity:.8});
   const extent=[[43.2,-67.4],[46.9,-59.1]];
-  map.fitBounds(extent);
+  const halifaxExample = L.latLng(44.617, -63.446);
+  map.setView(halifaxExample, 10);
   L.geoJSON(land,{interactive:false,style:{stroke:true,color:"#91a497",weight:1,fillColor:"#f1ecdc",fillOpacity:1}}).addTo(map);
   for(const feature of shapes.features) {
     L.geoJSON(feature,{interactive:false,style:{stroke:false,fillColor:colours[feature.properties.class],fillOpacity:.93}}).addTo(map);
@@ -40,17 +41,19 @@ function makeMap(shapes,land) {
   }
   map.on("zoomend",addLabels);addLabels();
   let pin;
-  function inspect(pos) {
+  function inspect(pos, place = "") {
     const cls=habitatAt(shapes.features,pos.lng,pos.lat);
-    el("inspect").textContent=pos.lat.toFixed(3)+"°, "+pos.lng.toFixed(3)+"° · "+(cls?cls+". "+explanations[cls]:"Outside the modelled polygons at this display scale.");
+    el("inspect").textContent=place+pos.lat.toFixed(3)+"°, "+pos.lng.toFixed(3)+"° · "+(cls?cls+". "+explanations[cls]:"Outside the modelled polygons at this display scale.");
     if(pin) pin.remove();
     pin=L.circleMarker(pos,{radius:6,color:"#211f16",weight:2,fillColor:"#fff",fillOpacity:.2,interactive:false}).addTo(map);
   }
+  inspect(halifaxExample, "Halifax coast example · ");
   map.on("click",event=>inspect(event.latlng));
   el("coast").onchange=()=>{
     const coast=coasts[el("coast").value];
     if(pin){pin.remove();pin=null;}
-    if(coast){map.setView(coast[0],coast[1]);el("inspect").textContent="Viewing "+coast[2]+". Select a point in the water to read the model.";}
+    if(el("coast").value==="halifax"){map.setView(halifaxExample,10);inspect(halifaxExample,"Halifax coast example · ");}
+    else if(coast){map.setView(coast[0],coast[1]);el("inspect").textContent="Viewing "+coast[2]+". Select a point in the water to read the model.";}
     else{map.fitBounds(extent);el("inspect").textContent="Select a point to inspect its habitat class.";}
   };
 }

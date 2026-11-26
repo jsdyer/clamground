@@ -38,6 +38,9 @@ def main():
                 page.locator("#year").select_option("2006")
                 assert "Withheld by DFO" in page.locator("#stat-value").inner_text()
                 page.locator("#map.leaflet-container").wait_for()
+                assert page.locator("#coast").input_value() == "halifax"
+                assert "Halifax coast example" in page.locator("#inspect").inner_text()
+                assert "Suitable and Validated" in page.locator("#inspect").inner_text()
                 page.locator("#coast").select_option("digby")
                 assert "Digby" in page.locator("#inspect").inner_text()
                 page.locator("#map").click(position={"x":110,"y":130})
