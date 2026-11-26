@@ -6,6 +6,8 @@
 Compare Nova Scotia and New Brunswick over the same years to see where DFO published landings or marked them x for confidentiality. For a local historical view, choose a county in the 1931 returns and check its barrels or canned cases against the linked scan of page 84.
 <!-- /coolcode:guide -->
 
+[Browse annual clam landings by province or region](https://coolcode.ca/clamground/landings/). Each data build publishes the observation history, original source links and a project sitemap from the checked-in edition.
+
 ## Reading the habitat model
 
 The DFO Maritimes region classified soft substrates and depths from 0 to 70 metres. A suitable polygon in a validated coastal sector means historical harvesting or enforcement records established clam presence somewhere in that sector. Unclassified space is left blank. The map uses a regional display copy generalized at 0.003 degrees; its edges are approximate. The official [shellfish closures map](https://www.dfo-mpo.gc.ca/shellfish-mollusques/cssp-map-eng.htm) provides harvesting closure information. Check applicable rules and advisories before harvesting.

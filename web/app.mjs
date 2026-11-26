@@ -84,7 +84,8 @@ function downloadHistory(rows, filename) {
 function makeHistory(data) {
   const firstYear = Number(data.firstYear);
   for (const region of [...new Set(data.rows.map(r=>r.region))].sort()) el("region").add(new Option(region,region));
-  el("region").value="Nova Scotia";
+  const requested = new URLSearchParams(location.search).get("region");
+  el("region").value = data.rows.some(row => row.region === requested) ? requested : "Nova Scotia";
   let rows, paired;
   function compare() {
     const start = Number(el("baseline").value), end = Number(el("year").value), metric = el("metric").value;
